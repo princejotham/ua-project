@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add-proponents-input').click(function(){
 		i++;
-		$('#proponent-inputs').append('<div class="input-group mt-2" id="rowproponent'+i+'"><input type="text" class="form-control" id="proponent'+i+'" placeholder="Enter Name of Proponent" name="proponent[]"><span class="input-group-append"><button type="button" name="removeproponent" id="'+i+'" class="btn btn-danger btn_remove_proponent">Del</button></span></div>');
+		$('#proponent-inputs').append('<div class="input-group mt-2" id="rowproponent'+i+'"><input type="text" class="form-control" id="proponent'+i+'" placeholder="Enter Name of Proponent" name="proponent[]" id="proponent_error"><span class="input-group-append"><button type="button" name="removeproponent" id="'+i+'" class="btn btn-danger btn_remove_proponent">Del</button></span><span class="help-block" id="proponent_error"></span></div>');
 	});
 	
 	$(document).on('click', '.btn_remove_proponent', function(){
@@ -46,4 +46,44 @@ $(document).ready(function(){
 	});
 
 	$('.dropify').dropify();
+
+  $("#research_form").submit(function(e){
+  	e.preventDefault();
+    $('#btn_research_save').text('Saving...'); //change button text
+    $('#btn_research_save').attr('disabled',true); //set button disable
+
+
+    // ajax adding data to database
+    var formData = new FormData($('#research_form')[0]);
+    $.ajax({
+      url : './research/research_create',
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      dataType: "JSON",
+      success: function(data)
+      {
+        if(data.status) //if success close modal and reload ajax table
+        {
+					alert("Submitted");
+        }
+        else
+        {
+          for (var i = 0; i < data.inputerror.length; i++) 
+          {
+            $('#'+data.inputerror[i]+'').text(data.error_string[i]); //select span help-block class set text error string
+          }
+        }
+        $('#btn_research_save').text('Submit Proposal'); //change button text
+        $('#btn_research_save').attr('disabled',false); //set button enable 
+      },
+      error: function (jqXHR, textStatus, errorThrown)
+      {
+        alert('Error adding / update data');
+        $('#btn_research_save').text('Submit Proposal'); //change button text
+        $('#btn_research_save').attr('disabled',false); //set button enable 
+      }
+    });
+  });
 });

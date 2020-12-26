@@ -7,19 +7,21 @@
 				<h3 class="text-center"><?=$page_title;?></h3>
 			</div>
 			<h5 class="header-title pb-3 text-center">Fill out the forms</h5>           
-			<form role="form" method="post">
+			<form role="form" method="post" action="#" enctype="multipart/form-data" id="research_form">
 				<div class="form-group">
 					<label for="title">Title</label>
 					<input type="text" class="form-control" name="title" placeholder="Enter Title">
+          <span class="help-block text-danger" id="title_error"></span>
 				</div>
 				<div class="form-group" id="proponent-inputs">
 					<label for="proponent">Name of Proponent/s</label>
 					<div class="input-group">
 						<input type="text" class="form-control" name="proponent[]" placeholder="Enter Name of Proponent" name="proponent[]">
-                        <span class="input-group-append">
-                            <button type="button" name="proponent[]" id="add-proponents-input" class="btn btn-success">Add Proponent</button>
-                        </span>
-                    </div>
+            <span class="input-group-append">
+                <button type="button" name="proponent[]" id="add-proponents-input" class="btn btn-success">Add Proponent</button>
+            </span>
+          	<span class="help-block text-danger" id="proponent_error"></span>
+          </div>
 				</div>
 				<div class="form-group">
 					<label for="college-affiliation">College Affiliation</label>
@@ -62,12 +64,13 @@
 				<div class="form-group">
 					<label for="references">References</label>
 					<input type="text" class="form-control" name="references" placeholder="Enter References">
+        	<span class="help-block text-danger" id="references_error"></span>
 				</div>
 				<div class="form-group">
 					<label for="prepared-by">Upload Soft Copy</label>
           <input type="file" id="input-file-now" class="dropify" name="research_soft_copy" />
 				</div>
-				<button type="submit" class="btn btn-primary btn-block" name="research_submit">Submit Proposal</button>
+				<button type="submit" class="btn btn-primary btn-block" name="research_submit" id="btn_research_save">Submit Proposal</button>
 			</form>
 		</div>
 	</div>

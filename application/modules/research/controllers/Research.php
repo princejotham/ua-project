@@ -153,21 +153,21 @@ class Research extends MY_Controller
 
 		if($this->input->post('title') == '')
 		{
-			$data['inputerror'][] = 'title';
+			$data['inputerror'][] = 'title_error';
 			$data['error_string'][] = 'Title is required';
 			$data['status'] = FALSE;
 		}
 
-		if($this->input->post('proponent') == '')
+		if($this->input->post('proponent[]') == '')
 		{
-			$data['inputerror'][] = 'proponent';
+			$data['inputerror'][] = 'proponent_error';
 			$data['error_string'][] = 'Proponent is required';
 			$data['status'] = FALSE;
 		}
 
 		if($this->input->post('references') == '')
 		{
-			$data['inputerror'][] = 'references';
+			$data['inputerror'][] = 'references_error';
 			$data['error_string'][] = 'References is required';
 			$data['status'] = FALSE;
 		}
