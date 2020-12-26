@@ -24,6 +24,7 @@
         <link href="<?=base_url();?>assets/plugins/colorpicker/asColorPicker.min.css" rel="stylesheet" type="text/css" />
         <link href="<?=base_url();?>assets/plugins/jquery-multi-select/multi-select.css" rel="stylesheet" type="text/css" />
         <link href="<?=base_url();?>assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?=base_url();?>assets/plugins/dropify/css/dropify.min.css" rel="stylesheet">
 
         <!-- Theme Css -->
         <link href="<?=base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -458,6 +459,7 @@
         <script src="<?=base_url();?>assets/plugins/spinner/spinner.min.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
         <script src="<?=base_url();?>assets/pages/jquery.form-advance.init.js" type="text/javascript"></script>
+        <script src="<?=base_url();?>assets/plugins/dropify/js/dropify.min.js"></script>
 
         <!--app js-->
         <script src="<?=base_url();?>assets/js/jquery.app.js"></script>
