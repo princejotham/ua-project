@@ -158,11 +158,15 @@ class Research extends MY_Controller
 			$data['status'] = FALSE;
 		}
 
-		if($this->input->post('proponent[]') == '')
-		{
-			$data['inputerror'][] = 'proponent_error';
-			$data['error_string'][] = 'Proponent is required';
-			$data['status'] = FALSE;
+		if(!empty($this->input->post('proponent'))){
+			foreach ($this->input->post('proponent') as $key => $value) {
+				// $this->db->insert('tagslist',$value);
+				if($value == '') {
+					$data['inputerror'][] = 'proponent_error';
+					$data['error_string'][] = 'Proponent is required';
+					$data['status'] = FALSE;
+				}
+			}
 		}
 
 		if($this->input->post('references') == '')

@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add-proponents-input').click(function(){
 		i++;
-		$('#proponent-inputs').append('<div class="input-group mt-2" id="rowproponent'+i+'"><input type="text" class="form-control" id="proponent'+i+'" placeholder="Enter Name of Proponent" name="proponent[]" id="proponent_error"><span class="input-group-append"><button type="button" name="removeproponent" id="'+i+'" class="btn btn-danger btn_remove_proponent">Del</button></span><span class="help-block" id="proponent_error"></span></div>');
+		$('#proponent-inputs').append('<div class="input-group mt-2" id="rowproponent'+i+'"><input type="text" class="form-control" id="proponent'+i+'" placeholder="Enter Name of Proponent" name="proponent[]" id="proponent_error"><span class="input-group-append"><button type="button" name="removeproponent" id="'+i+'" class="btn btn-danger btn_remove_proponent">Del</button></span></div><span class="help-block text-danger" id="proponent_error'+i+'"></span>');
 	});
 	
 	$(document).on('click', '.btn_remove_proponent', function(){
@@ -85,5 +85,8 @@ $(document).ready(function(){
         $('#btn_research_save').attr('disabled',false); //set button enable 
       }
     });
+  });
+  $("input[name='proponent[]']").change(function(e){
+		console.log('Proponent Change');
   });
 });
