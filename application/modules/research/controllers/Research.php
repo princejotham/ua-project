@@ -5,7 +5,8 @@ class Research extends MY_Controller
 {
     public function __construct()
     {
-        parent::__construct();
+      parent::__construct();
+			$this->load->model('research_model','research');
     }
 
 	public function index() {
@@ -91,5 +92,90 @@ class Research extends MY_Controller
 		$data['content_view'] = "research/create_activity";
 
 		$this->template->index($data);
+	}
+
+	public function research_create()
+	{
+		$this->_validate();
+		
+		$research_data = array(
+			'title' => $this->input->post('title'),
+			'affiliation' => $this->input->post('college_affiliation'),
+			'background_study' => $this->input->post('background_study'),
+			'significant_study' => $this->input->post('significant'),
+			'definition_terms' => $this->input->post('definition_terms'),
+			'methodology' => $this->input->post('methodology'),
+			'work_plan' => $this->input->post('work_plan'),
+			'credentials' => $this->input->post('credentials'),
+			'research_references' => $this->input->post('references')
+		);
+
+		$proponent_data = array(
+			'name' => $this->input->post('proponent')
+		);
+
+		$budget_data = array(
+			'description' => $this->input->post('budgetitem'),
+			'amount' => $this->input->post('budgetamount')
+		);
+
+		$insert = $this->research->save($research_data);
+
+		echo json_encode(array("status" => TRUE));
+	}
+
+	public function research_update()
+	{
+		$this->_validate();
+		$data = array(
+				'firstName' => $this->input->post('firstName'),
+				'lastName' => $this->input->post('lastName'),
+				'gender' => $this->input->post('gender'),
+				'address' => $this->input->post('address'),
+				'dob' => $this->input->post('dob'),
+			);
+		$this->research->update(array('id' => $this->input->post('id')), $data);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	public function research_delete($id)
+	{
+		$this->research->delete_by_id($id);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	private function _validate()
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
+
+		if($this->input->post('title') == '')
+		{
+			$data['inputerror'][] = 'title';
+			$data['error_string'][] = 'Title is required';
+			$data['status'] = FALSE;
+		}
+
+		if($this->input->post('proponent') == '')
+		{
+			$data['inputerror'][] = 'proponent';
+			$data['error_string'][] = 'Proponent is required';
+			$data['status'] = FALSE;
+		}
+
+		if($this->input->post('references') == '')
+		{
+			$data['inputerror'][] = 'references';
+			$data['error_string'][] = 'References is required';
+			$data['status'] = FALSE;
+		}
+
+		if($data['status'] === FALSE)
+		{
+			echo json_encode($data);
+			exit();
+		}
 	}
 }
